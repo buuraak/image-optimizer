@@ -1,0 +1,10 @@
+@import './variables.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    background: var(--main-bg-color);
+    color: var(--main-text-color);
+}
