@@ -1,6 +1,6 @@
 import CloudConvert from "cloudconvert";
 
-const cloudConvert = new CloudConvert(process.env.CLOUDCONVERT_SECRET);
+const cloudConvert = new CloudConvert(process.env.NEXT_PUBLIC_CLOUDCONVERT_SECRET);
 
 export const OptimizeFile = async (fileName: string, url: string) => {
     // Create a new job for the image
