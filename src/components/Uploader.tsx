@@ -7,8 +7,11 @@ const Uploader = () => {
     const [uploadingStatus, setUploadingStatus] = useState<string>();
     const [message, setMessage] = useState<string>();
 
-    const fileChangeHandler = event => {
-        setFile(event.target.files[0]);
+    const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if(event.target && event.target.files) {
+            setFile(event.target.files[0]);
+
+        }
     }
 
     const uploadFile = async () => {
