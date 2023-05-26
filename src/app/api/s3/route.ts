@@ -4,16 +4,20 @@ import { NextResponse } from "next/server";
 
 const ONE_HOUR: number = (60 * 60);
 
+/*
+    * Right now typescript gives an error because the process.env type returns 'string | undefined' which does not match the credentials typescript 
+*/
+const AWS_ACCESS_KEY = process.env.ACCESS_KEY ?? 'default'; 
+const AWS_SECRET_KEY = process.env.SECRET_KEY ?? 'default';
 
 export async function POST(request: Request) {
     if(request.method !== "POST") NextResponse.json({message: "Only POST method allowed"}, {status: 405});
     const s3 = new S3Client({
     region: process.env.REGION,
     credentials: {
-        accessKeyId: process.env.ACCESS_KEY,
-        secretAccessKey: process.env.SECRET_KEY
+        accessKeyId: AWS_ACCESS_KEY,
+        secretAccessKey: AWS_SECRET_KEY
     },
-    signatureVersion: 'v4'
 });
 
 
