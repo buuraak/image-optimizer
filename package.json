@@ -9,11 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.338.0",
+    "@aws-sdk/s3-request-presigner": "^3.338.0",
     "@types/node": "20.2.1",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
-    "aws-sdk": "^2.1383.0",
     "axios": "^1.4.0",
     "cloudconvert": "^2.3.2",
     "eslint": "8.41.0",
