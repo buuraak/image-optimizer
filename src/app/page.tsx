@@ -1,6 +1,4 @@
-import Image from "next/image";
 import IntroSection from "../components/IntroHeader";
-
 export default function Home() {
     return (
             <main className="mx-auto container text-center px-6">
