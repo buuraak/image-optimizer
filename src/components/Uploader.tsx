@@ -4,38 +4,42 @@ import axios from "axios";
 
 const Uploader = () => {
     const [file, setFile] = useState<any>();
-    const [uploadingStatus, setUploadingStatus] = useState<string>();
     const [message, setMessage] = useState<string>();
 
     const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         if(event.target && event.target.files) {
             setFile(event.target.files[0]);
-
+            setMessage(`${event.target.files[0].name} has been added!`);
         }
     }
 
     const uploadFile = async () => {
-        setUploadingStatus("Uploading the image");
         let data  =  await fetch('/api/s3', {
             method: 'POST',
             body: JSON.stringify({name: encodeURIComponent(file.name), type: encodeURIComponent(file.type)})
         });
-
-        const url = await data.json();
-
-        await axios.put(url, file, {
-            headers: {
-                "Content-type": file.type,
-                "Access-Control-Allow-Origin": "*",
-            },
-        })
+        try {
+            const url = await data.json();
+            await axios.put(url, file, {
+                headers: {
+                    "Content-type": file.type,
+                    "Access-Control-Allow-Origin": "*",
+                },
+            });
+        } catch(error) {
+            console.log(error);
+        }
     }
 
     return (
         <>
-            <input type="file" onChange={fileChangeHandler} accept='.png,.pdf,.jpg'/>
-            {file && 
-                <button onClick={uploadFile} className="bg-sky-500 text-white py-2 px-3 mt-5 rounded-sm hover:bg-sky-700 transition-all duration-300">Upload!</button>
+            <label htmlFor="uploader" className="bg-white py-[.6rem] px-5 tracking-tight leading-tight  hover:bg-white/90 rounded-sm cursor-pointer text-black">Choose file</label>
+            <input type="file" id="uploader"  className='hidden'  onChange={fileChangeHandler} accept='.png,.pdf,.jpg'/>
+            {file && message &&
+                <>
+                    <button onClick={uploadFile} className="bg-transparent tracking-tight leading-tight text-white rounded-sm py-2 px-5 ml-3 border-white border-[1px]">Upload!</button>
+                    <small className="block mt-3">{message}</small>
+                </>
             }
         </>
     )
