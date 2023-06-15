@@ -22,17 +22,26 @@ export async function POST(request: Request) {
 
 
     try {
-        let { name, type  } = await request.json();
-
+        const formData  = await request.formData();
+        const file: any = formData.get('file');
+        
         const fileParams = {
             Bucket: process.env.BUCKET_NAME,
-            Key: name,
-            ContentType: type,
+            Key: file.name,
+            ContentType: file.type,
         };
         const command = new PutObjectCommand(fileParams);
         const url = await getSignedUrl(s3, command, {expiresIn: ONE_HOUR});
-
-        return NextResponse.json(url, {status:200});
+        
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                "Content-type": file.type,
+                "Access-Control-Allow-Origin": "*",
+            },
+            body: file
+        });
+        return NextResponse.json({message: 'success', fileName: file.name}, {status:200});
 
     } catch(error) {
         console.log(error);

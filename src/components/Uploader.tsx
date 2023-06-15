@@ -8,27 +8,18 @@ const Uploader = () => {
 
     const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         if(event.target && event.target.files) {
-            setFile(event.target.files[0]);
+            setFile(event.target.files[0]); 
             setMessage(`${event.target.files[0].name} has been added!`);
         }
     }
 
     const uploadFile = async () => {
-        let data  =  await fetch('/api/s3', {
+        const formData = new FormData();
+        formData.append('file', file);
+        await fetch('/api/s3', {
             method: 'POST',
-            body: JSON.stringify({name: encodeURIComponent(file.name), type: encodeURIComponent(file.type)})
-        });
-        try {
-            const url = await data.json();
-            await axios.put(url, file, {
-                headers: {
-                    "Content-type": file.type,
-                    "Access-Control-Allow-Origin": "*",
-                },
-            });
-        } catch(error) {
-            console.log(error);
-        }
+            body: formData
+        });       
     }
 
     return (
