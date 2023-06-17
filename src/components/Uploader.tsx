@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from 'react';
-import axios from "axios";
 
 const Uploader = () => {
     const [file, setFile] = useState<any>();
@@ -12,7 +11,6 @@ const Uploader = () => {
             setMessage(`${event.target.files[0].name} has been added!`);
         }
     }
-
     const uploadFile = async () => {
         const formData = new FormData();
         formData.append('file', file);
