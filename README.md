@@ -10,3 +10,6 @@ The application first uploads the original image on my own AWS S3 bucket, after 
 2. AWS SDK - S3
 3. Tailwind CSS
 4. TypeScript
+
+## Things I'd like to do/add in the future
+1. Build user authentication which saves the compressed images. Which comes with functionalities such as requesting deletion of saved images.
