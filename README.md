@@ -3,6 +3,7 @@ Simple web application which allows you to upload and compress images (PNG, JPG,
 
 ## How does it work?
 The application first uploads the original image on my own AWS S3 bucket, after a succesful upload the app creats a POST request to my <a href="https://github.com/buuraak/cloudconverter">Node.js application</a> which then uses the CloudConvert API to compress the image and sends back an URL including the download link of the compressed image.
+***(The reason I use a separate Node.js application instead of the built in Node.js in Next.js is purely because I wanted to experiment building my own Node.js application)***
 
 ## This application is built using
 1. Next.js (version 13 using the new app router)
