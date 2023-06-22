@@ -18,13 +18,9 @@ const Uploader = () => {
         }
     };
 
-    const calculateCompressedData = (
-        originalSize: number,
-        compressedSize: number
-    ) => {
-        return Math.round(
-            ((originalSize / 100) * compressedSize) / (1024 * 1024)
-        );
+    const calculateCompressedData = ( originalSize: number, compressedSize: number ) => {
+        const calculation = ((originalSize - compressedSize) / originalSize) * 100;
+        return Math.round(calculation);
     };
 
     const uploadFile = async () => {
