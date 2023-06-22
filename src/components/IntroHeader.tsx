@@ -15,7 +15,6 @@ const IntroHeader = () => {
             <div className="pt-5">
                 <Uploader />
             </div>
-
         </header>
     );
 };
