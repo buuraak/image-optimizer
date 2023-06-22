@@ -8,13 +8,14 @@ let fileName: string;
 
 const Uploader = () => {
     const [file, setFile] = useState<any>();
-    const [compressedFile, setCompressedFile] = useState<string>();
+    const [compressedFile, setCompressedFile] = useState<any>();
     const [message, setMessage] = useState<string>();
 
     const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target && event.target.files) {
             setFile(event.target.files[0]);
             setMessage(`${event.target.files[0].name} has been added!`);
+            setCompressedFile(null);
         }
     };
 
