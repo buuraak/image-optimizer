@@ -58,7 +58,7 @@ const Uploader = () => {
         try {
             toast.update(id, { render: "Compressing file" });
             const compressorResponse = await fetch(
-                "http://localhost:4000/compress-image",
+                "https://cloudconverter.vercel.app/compress-image/compress-image",
                 {
                     method: "POST",
                     headers: {
