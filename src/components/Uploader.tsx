@@ -71,7 +71,7 @@ const Uploader = () => {
             const compressorData = await compressorResponse.json();
 
             toast.update(id, {
-                render: "File compressed Successfully",
+                render: "File compressed successfully",
                 type: "success",
                 isLoading: false,
                 autoClose: 3000,
@@ -100,10 +100,7 @@ const Uploader = () => {
 
     return (
         <>
-            <label
-                htmlFor="uploader"
-                className="bg-white py-[.6rem] px-5 tracking-tight leading-tight  hover:bg-white/90 rounded-sm cursor-pointer text-black"
-            >
+            <label htmlFor="uploader" className="bg-white py-[.6rem] px-5 tracking-tight leading-tight  hover:bg-white/90 rounded-sm cursor-pointer text-black">
                 Choose file
             </label>
             <input
@@ -115,10 +112,7 @@ const Uploader = () => {
             />
             {file && message && (
                 <>
-                    <button
-                        onClick={uploadFile}
-                        className="bg-transparent tracking-tight leading-tight text-white rounded-sm py-2 px-5 ml-3 border-white border-[1px]"
-                    >
+                    <button onClick={uploadFile} className="bg-transparent tracking-tight leading-tight text-white rounded-sm py-2 px-5 ml-3 border-white border-[1px]">
                         Upload
                     </button>
                     <small className="block mt-5">{message}</small>
@@ -126,11 +120,7 @@ const Uploader = () => {
             )}
             {compressedFile && message && (
                 <>
-                    <a
-                        href={compressedFile}
-                        target="_blank"
-                        className="bg-transparent tracking-tight leading-tight text-white rounded-sm py-2 px-5 ml-3 border-white border-[1px]"
-                    >
+                    <a href={compressedFile} target="_blank" className="bg-transparent tracking-tight leading-tight text-white rounded-sm py-2 px-5 ml-3 border-white border-[1px]">
                         Download
                     </a>
                     <small className="block mt-5">
