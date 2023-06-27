@@ -12,11 +12,18 @@ const Uploader = () => {
     const [message, setMessage] = useState<string>();
 
     const fileChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target && event.target.files) {
-            setFile(event.target.files[0]);
-            setMessage(`${event.target.files[0].name} has been added!`);
-            setCompressedFile(null);
+        if(!event.target || !event.target.files) {
+            return;
+        } else if(event.target.files[0].size >= 5000000) {
+            toast.error('File size cannot be larger than 5MB', {
+                autoClose: 3000
+            });
+            return;
         }
+
+        setFile(event.target.files[0]);
+        setMessage(`${event.target.files[0].name} has been added!`);
+        setCompressedFile(null);
     };
 
     const calculateCompressedData = ( originalSize: number, compressedSize: number ) => {
@@ -51,7 +58,7 @@ const Uploader = () => {
         try {
             toast.update(id, { render: "Compressing file" });
             const compressorResponse = await fetch(
-                "https://cloudconverter.vercel.app/compress-image",
+                "http://localhost:4000/compress-image",
                 {
                     method: "POST",
                     headers: {
